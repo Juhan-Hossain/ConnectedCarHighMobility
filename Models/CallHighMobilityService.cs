@@ -3,7 +3,6 @@ using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Demo_APP.Models
 {
@@ -12,23 +11,17 @@ namespace Demo_APP.Models
         private readonly IHighMobilityApiCaller _highMobilityApiCaller;
         private readonly IMemoryCache _cache;
         private readonly IPushNotificationService _pushNotificationService;
-        private readonly IConfiguration configuration;
         private readonly string _baseUrl = "https://sandbox.api.high-mobility.com/";
-        private string _acessToken = "";
         private FirebaseApp _firebaseApp;
 
         public CallHighMobilityService(
             IHighMobilityApiCaller highMobilityApiCaller,
             IMemoryCache memoryCache,
-            IPushNotificationService pushNotificationService,
-            IHighMobilityAuthService highMobilityAuthService,
-            IConfiguration configuration)
-
+            IPushNotificationService pushNotificationService)
         {
             _highMobilityApiCaller = highMobilityApiCaller;
             _cache = memoryCache;
             _pushNotificationService = pushNotificationService;
-            this.configuration = configuration;
 
             // Ensure security protocols
             System.Net.ServicePointManager.SecurityProtocol =
@@ -42,7 +35,7 @@ namespace Demo_APP.Models
                 {
                     if (_firebaseApp == null)
                     {
-                        string serviceAccountPath = configuration["FirebaseApp:AppAdminPath"];
+                        string serviceAccountPath = @"C:\Users\BS639\Downloads\azure-push-notification-rnd-firebase-adminsdk-gs3h9-b5a0144766.json";
 
                         // Initialize Firebase app with the service account
                         _firebaseApp = FirebaseApp.Create(new AppOptions()
@@ -54,7 +47,7 @@ namespace Demo_APP.Models
             }
 
             // Get the access token from Firebase credentials (can be done on demand later)
-            var googleCredential = GoogleCredential.FromFile(configuration["FirebaseApp:AppAdminPath"])
+            var googleCredential = GoogleCredential.FromFile(@"C:\Users\BS639\Downloads\azure-push-notification-rnd-firebase-adminsdk-gs3h9-b5a0144766.json")
                 .CreateScoped("https://www.googleapis.com/auth/firebase.messaging");
 
             var accessToken = googleCredential.UnderlyingCredential.GetAccessTokenForRequestAsync();
@@ -88,7 +81,7 @@ namespace Demo_APP.Models
                     }
 
                     // Wait for 0.5 seconds before the next API call
-                    await Task.Delay(TimeSpan.FromMilliseconds(30000));
+                    await Task.Delay(TimeSpan.FromMilliseconds(300000));
                 }
             }
             catch (Exception ex)

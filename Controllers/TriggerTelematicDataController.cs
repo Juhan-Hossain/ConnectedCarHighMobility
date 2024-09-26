@@ -32,16 +32,34 @@ namespace Demo_APP.Controllers
         }
 
         [HttpGet(Name = "GetNotifiedRealTimeData")]
-        public IActionResult Get(string vin)
+        public IActionResult Get(string vin,string registrationToken, string authToken)
         {
             try
             {
+                //var authTokenDto = new AppSettingsUpdateDto
+                //{
+                //    Section = "HighMobility",
+                //    Key = "AccessToken",
+                //    Value = authToken
+                //};
+                //var firebaseRegistrationTokenDto = new AppSettingsUpdateDto
+                //{
+                //    Section = "HighMobility",
+                //    Key = "AccessToken",
+                //    Value = authToken
+                //};
+                //_updatesAppSettingsService.UpdateAppSetting(authTokenDto);
+                //_updatesAppSettingsService.UpdateAppSetting(firebaseRegistrationTokenDto);
                 var vehicleData = _callHighMobilityService.CallAndProcessAsync(vin);
             }
             catch (Exception ex)
             {
+
                 throw;
             }
+            
+            
+           // var res = new List<WeatherForecast>();
 
             return Ok();
         }

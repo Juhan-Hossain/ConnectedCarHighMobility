@@ -32,8 +32,6 @@ builder.Services.AddScoped<ICallHighMobilityService, CallHighMobilityService>();
 builder.Services.AddSingleton<IMemoryCache, MemoryCache>();
 builder.Services.AddScoped<IPushNotificationService, PushNotificationService>();
 builder.Services.AddScoped<IUpdateAppSettingsService, UpdateAppSettingsService>();
-builder.Services.AddSingleton<IHighMobilityAuthService, HighMobilityAuthService>();
-builder.Services.AddScoped<IFirebaseConfigHelperService, FirebaseConfigHelperService>();
 builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<HighMobilityConfig>>().Value);
 
 var app = builder.Build();
