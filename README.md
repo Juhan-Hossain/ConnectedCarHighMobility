@@ -1,6 +1,4 @@
-Here’s an updated version of your `README.md` to include the creation of the Firebase admin permission file:
 
----
 
 # Connected Car Event Trigger using High Mobility API
 
@@ -17,7 +15,7 @@ This repository integrates the [High Mobility API](https://www.high-mobility.com
 
 ## Technologies Used
 
-- **.NET Core 7.0**
+- **.NET Core 8.0**
 - **High Mobility API**
 - **Firebase Cloud Messaging (FCM)**
 - **Firebase Admin SDK** for permission management.
