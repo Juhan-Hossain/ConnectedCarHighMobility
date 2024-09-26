@@ -13,7 +13,13 @@ namespace Demo_APP.Services
 {
     public class PushNotificationService : IPushNotificationService
     {
-        private readonly string _registrationToken = "faDfOof2Rjyh3a4hy5NCfc:APA91bGE3IlGUtSyFfj4DkQmvn8OebpyzDgevcsWEyzEuRJrrJWY3m-zJnaQjSp6zD2JdV2RYUuRcU_h4GkF_mdoFcTwOEYdBv4DHWo8lLSmdkfwsEqYiHmkry8G_VguSDduCrshy8Lp";
+        private readonly IFirebaseConfigHelperService _firebaseConfigHelperService;
+        private string _registrationToken = "";
+        public PushNotificationService(IFirebaseConfigHelperService firebaseConfigHelperService)
+        {
+            _firebaseConfigHelperService = firebaseConfigHelperService;
+            _registrationToken = _firebaseConfigHelperService.ReadConfigAsync().Result.FirebaseApp.DeviceRegistrationToken;
+        }
 
         public async Task SendPushNotification(double temperature)
         {
