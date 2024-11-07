@@ -11,10 +11,7 @@ namespace Demo_APP.Controllers
     [Route("[controller]")]
     public class TriggerTelematicDataController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+       
 
         private readonly ILogger<TriggerTelematicDataController> _logger;
         private readonly ICallHighMobilityService _callHighMobilityService;
