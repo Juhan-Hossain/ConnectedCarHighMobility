@@ -32,7 +32,7 @@ namespace Demo_APP.Services
                     Notification = new Notification
                     {
                         Title = "High Engine Coolant Temperature",
-                        Body = $"The engine coolant temperature is {temperature} °C, which is above the safe threshold."
+                        Body = $"Your car's engine's temperature overheated to {temperature} °C, which is above the safe threshold (45°C)."
                     }
                 };
                 var jsonPayload = JsonConvert.SerializeObject(notificationPayload);

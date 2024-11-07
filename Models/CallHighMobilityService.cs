@@ -62,13 +62,13 @@ namespace Demo_APP.Models
         public async Task CallAndProcessAsync(string vin)
         {
         var startTime = DateTime.UtcNow;
-        var endTime = startTime.AddMinutes(2);
-            var cacheKey = $"vehicleData_{vin}";
-            var cacheDuration = TimeSpan.FromMinutes(2);
-            _cache.Set(cacheKey, endTime, cacheDuration);
+        var endTime = startTime.AddHours(10);
+            //var cacheKey = $"vehicleData_{vin}_0";
+            //var cacheDuration = TimeSpan.FromHours(2);
+            //_cache.Set(cacheKey, endTime);
             try
             {
-                while (DateTime.UtcNow <= _cache.Get<DateTime>(cacheKey))
+                while (DateTime.UtcNow <= endTime)
                 {
                     var vehicleData = _highMobilityApiCaller.CallApiAsync($"{_baseUrl}/v1/vehicle-data/autoapi-13/{vin}");
                     var result = vehicleData?.Result?.ToString() ?? "";
@@ -76,7 +76,7 @@ namespace Demo_APP.Models
                     var myDeserializedClass = JsonConvert.DeserializeObject<Root>(result);
                     var response = myDeserializedClass?.diagnostics.engine_coolant_temperature.data.value.ToString() ?? "";
 
-                    
+
                     var engineCoolantTemperature = myDeserializedClass?.diagnostics.engine_coolant_temperature.data.value ?? 0;
 
                     // Check if temperature is greater than 45°C
@@ -88,7 +88,7 @@ namespace Demo_APP.Models
                     }
 
                     // Wait for 0.5 seconds before the next API call
-                    await Task.Delay(TimeSpan.FromMilliseconds(30000));
+                    await Task.Delay(TimeSpan.FromSeconds(30));
                 }
             }
             catch (Exception ex)
