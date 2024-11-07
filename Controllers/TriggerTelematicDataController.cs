@@ -33,12 +33,12 @@ namespace Demo_APP.Controllers
         {
             try
             {
-                var authTokenDto = new AppSettingsUpdateDto
-                {
-                    Section = "HighMobility",
-                    Key = "AccessToken",
-                    Value = authToken
-                };
+                //var authTokenDto = new AppSettingsUpdateDto
+                //{
+                //    Section = "HighMobility",
+                //    Key = "AccessToken",
+                //    Value = authToken
+                //};
                 //var firebaseRegistrationTokenDto = new AppSettingsUpdateDto
                 //{
                 //    Section = "HighMobility",
